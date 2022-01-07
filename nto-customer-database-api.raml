@@ -1,0 +1,100 @@
+#%RAML 1.0
+types:
+  Address:
+    description: Address data type
+    example:
+      strict: true
+      value:
+        street: 44 Shirley Ave.
+        city: West Chicago
+        Postal-code: "60185"
+        state: IL
+        country: USA
+    properties:
+      street?:
+        example: Example
+        type: string
+      city:
+        example: Example
+        type: string
+      Postal-code:
+        example: Example
+        type: string
+      state:
+        example: Example
+        type: string
+      country:
+        example: Example
+        type: string
+  Contact:
+    description: |
+      # contact data type
+    example:
+      strict: true
+      value:
+        firstName: Danny
+        lastName: Brookshire
+        phone: 123-412-3412
+        email: danny.brookshire@example.com
+        deliveryAddress:
+          street: 44 Shirley Ave.
+          city: West Chicago
+          Postal-code: "60185"
+          state: IL
+          country: USA
+        postalAddress:
+          street: 44 Shirley Ave.
+          city: West Chicago
+          Postal-code: "60185"
+          state: IL
+          country: USA
+    properties:
+      firstName?:
+        example: Example
+        type: string
+      lastName:
+        example: Example
+        type: string
+      phone?:
+        example: Example
+        type: string
+      email?:
+        example: Example
+        type: string
+      deliveryAddress?:
+        type: Address
+      postalAddress:
+        type: Address
+title: NTO Customer Datebase API
+baseUri: api.samplebaseuri.com
+description: A simple API to retrieve information from Northern Trail Outfitters Customer database.
+mediaType:
+  - application/json
+protocols:
+  - HTTP
+  - HTTPS
+/customers:
+  get:
+    displayName: Get list customers
+    body: {}
+    responses:
+      "200":
+        body:
+          application/json:
+            items:
+              type: Contact
+    securedBy: []
+/customers/new-resource: {}
+/customers/{customerId}:
+  get:
+    displayName: Get customer by ID
+    responses:
+      "200":
+        body:
+          application/json:
+            type: Contact
+  uriParameters:
+    customerId:
+      example: Example
+      type: string
+securedBy: []
